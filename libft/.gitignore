@@ -1,0 +1,9 @@
+.vscode
+*.DS_Store
+*.env
+*.swp
+*.swo
+Dockerfile
+*.a
+*.o
+.DS_Store
