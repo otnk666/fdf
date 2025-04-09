@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 23:07:11 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/03/27 10:16:36 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/04/09 19:25:57 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,25 @@
 int	count_width(const char *str, char c)
 {
 	int	count;
-	int	in_word;
+	int	i;
 
 	count = 0;
-	in_word = 0;
-	while (*str)
+	i = 0;
+
+    while (str[i] == c)
+        i++;
+    
+	while (str[i])
 	{
-		if (*str == c)
-			in_word = 0;
-		else if (!in_word)
-		{
-			count++;
-			in_word = 1;
-		}
-		str++;
-	}
+		if (str[i] != c)
+        {
+            count++;
+            while(str[i] && str[i] != c)
+                i++;
+        }
+        while (str[i] == c)
+            i++;
+    }
 	return (count);
 }
 
@@ -38,13 +42,13 @@ void get_dimensions(t_fdf *data, int fd)
 {
     char *line;
     
+    data->height = 0;
     line = get_next_line(fd);
     if (line)
     {
         data->width = 0;
         data->width = count_width(line,' ');
-        data->width--;
-        data->height++;
+        data->height = 1;
         free(line);
         line = get_next_line(fd);
         while(line)
@@ -53,39 +57,9 @@ void get_dimensions(t_fdf *data, int fd)
             free(line);
             line = get_next_line(fd);
         }
-        free(line);
+        
     }
 }
-/*
-int get_height(int fd)
-{
-    int height;
-    char *line;
-    height = 0;
-    
-    line = get_next_line(fd);
-    
-    while(line)
-    {
-        height++;
-        free(line);
-        line = get_next_line(fd);
-    }
-    return (height);
-}
-*/
-
-/*
-int get_width(int fd)
-{
-    char *line;
-    size_t width;
-
-    line = get_next_line(fd);
-    width = count_width(line,' ');
-    free(line);
-    return(width);
-}*/
 
 void fill_matrix(int *z_line, char *line)
 {
@@ -103,13 +77,13 @@ void fill_matrix(int *z_line, char *line)
     while (nums[i])
     {
         // ft_atoiを呼び出す前にnums[i]の値を確認（デバッグ用）
-        printf("nums[%d] = %s\n", i, nums[i]);
+        // printf("nums[%d] = %s\n", i, nums[i]);
         
         z_line[i] = ft_atoi(nums[i]);
         free(nums[i]);
         i++;
     }
-    free(nums);
+    
 }
 
 void read_file(t_fdf *data, char *file_name)
@@ -142,6 +116,22 @@ void read_file(t_fdf *data, char *file_name)
     close(fd);
 }   
 
+int     deal_key(int key, t_fdf *data)
+{
+    ft_printf("%d\n",key);
+    if (key == 65362)
+        data-> shift_y -= 10;
+    if (key == 65364)
+        data-> shift_y += 10;
+    if (key == 65361)
+        data-> shift_x -= 10;
+    if (key == 65363)
+        data-> shift_x += 10;
+    mlx_clear_window(data->mlx_ptr, data->win_ptr);
+    draw(data);
+    return(0);
+}
+
 int main(int argc, char *argv[])
 {
     t_fdf *data;
@@ -157,23 +147,10 @@ int main(int argc, char *argv[])
     data = (t_fdf*)malloc(sizeof(t_fdf));
     read_file(data, argv[1]);
 
-    i = 0;
-    while(i < data->height)
-    {
-        j = 0;
-        while(j < data->width)
-        {
-            printf("%3d", data->z_matrix[i][j]);
-            j++;
-        }
-        printf("\n");
-        i++;
-    }
-
-    for (i = 0; i < data->height; i++)
-        free(data->z_matrix[i]);
-    free(data->z_matrix);
-    free(data);
-
-    return (0);
+    data->mlx_ptr = mlx_init();
+    data->win_ptr = mlx_new_window(data->mlx_ptr, 1000, 1000, "FDF");
+    data->zoom = 20;
+    draw(data);
+    mlx_key_hook(data->win_ptr, deal_key, data);
+    mlx_loop(data->mlx_ptr);
 }
