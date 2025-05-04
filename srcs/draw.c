@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 04:26:49 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/04 13:03:22 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/04 17:10:29 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ void    drawDDA(t_map *map, t_point p1, t_point p2)
     float current_y;
 
     map->color = ((int) p1.x-p2.x ||(int) p1.y-p2.y ) ? 0xe80c0c : 0xffffff;
+    zoom(map,p1,p2);
+
+    p1.x += map->shift_x;
+    p2.x += map->shift_x;
+    p1.y += map->shift_y;
+    p2.y += map->shift_y;
+    
     dx = ft_abs(p2.x - p1.x);
     dy = ft_abs(p2.y - p1.y);
     if (dx >= dy)

@@ -6,18 +6,31 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:25:23 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/04 13:19:22 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/04 18:07:29 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+int     deal_key(int key, t_map *data)
+{
+    ft_printf("%d\n",key);
+    if (key == 65362)
+        data-> shift_y -= 10;
+    if (key == 65364)
+        data-> shift_y += 10;
+    if (key == 65361)
+        data-> shift_x -= 10;
+    if (key == 65363)
+        data-> shift_x += 10;
+    mlx_clear_window(data->mlx_ptr, data->win_ptr);
+    draw(data);
+    return(0);
+}
 int main(int argc, char *argv[])
 {
     t_map *data;
-    int i;
-    int j;
-
+    
     if (argc != 2)
     {
         printf("Error: usage: ./fdf filename\n");
@@ -35,8 +48,12 @@ int main(int argc, char *argv[])
     read_file(argv[1], data); 
 
     data->mlx_ptr = mlx_init();
-    data->win_ptr = mlx_new_window(data->mlx, 1000, 1000,"FdF");
+    data->win_ptr = mlx_new_window(data->mlx_ptr, 1000, 1000,"FdF");
+    data->zoom = 100;
     
+    draw(data);
+    mlx_key_hook(data->win_ptr, deal_key, data);
+    mlx_loop(data->mlx_ptr);
     
     // i = 0;
     // while(i < data->height)
@@ -54,5 +71,5 @@ int main(int argc, char *argv[])
     // free_map(data->points, data->height);
     // free(data);
         
-    return(0);
+    // return(0);
 }
