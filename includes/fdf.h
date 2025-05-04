@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:49:41 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/04/28 19:49:40 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/02 03:36:49 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@ typedef struct s_map
 {
     int width;
     int height;
-    t_point **points;
-    
+    int color;
+    void    *mlx_ptr;
+    void    *win_ptr;
+    t_point **points;  
 }   t_map;
+
+
 
 void    free_map(t_point **map, int index);
 void    read_file(char *filename, t_map *data);

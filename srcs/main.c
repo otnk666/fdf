@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:25:23 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/04/28 19:49:57 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/04 13:19:22 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,25 @@ int main(int argc, char *argv[])
     
     read_file(argv[1], data); 
 
-    i = 0;
-    while(i < data->height)
-    {
-        j = 0;
-        while(j < data->width)
-        {
-            printf("%3d", data->points[i][j].z);
-            j++;
-        }
-        printf("\n");
-        i++;
-    }
+    data->mlx_ptr = mlx_init();
+    data->win_ptr = mlx_new_window(data->mlx, 1000, 1000,"FdF");
     
-    free_map(data->points, data->height);
-    free(data);
+    
+    // i = 0;
+    // while(i < data->height)
+    // {
+    //     j = 0;
+    //     while(j < data->width)
+    //     {
+    //         printf("%3d", data->points[i][j].z);
+    //         j++;
+    //     }
+    //     printf("\n");
+    //     i++;
+    // }
+    
+    // free_map(data->points, data->height);
+    // free(data);
         
     return(0);
 }
