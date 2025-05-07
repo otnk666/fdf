@@ -6,11 +6,21 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 04:26:49 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/04 17:10:29 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/07 18:54:44 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void    my_mlx_pixel_put(t_map *data, int x, int y, int color)
+{
+    char *dst;
+    if(x >= 0 && y >= 0 && x < data->width && y < data->height)
+    {
+        dst = data->addr + (y+data->line_length + x*(data->bpp / 8));
+        *(unsigned int *) dst = color;
+    }
+}
 
 int    ft_abs(int i)
 {
@@ -21,37 +31,46 @@ int    ft_abs(int i)
 
 void    drawDDA(t_map *map, t_point p1, t_point p2)
 {
-    float dx;
-    float dy;
-    float steps;
-    float current_x;
-    float current_y;
+    float   dx;
+    float   dy;
+    float   steps;
+    float   current_x;
+    float   current_y;
+    t_point p1_copy;
+    t_point p2_copy;
 
-    map->color = ((int) p1.x-p2.x ||(int) p1.y-p2.y ) ? 0xe80c0c : 0xffffff;
-    zoom(map,p1,p2);
-
-    p1.x += map->shift_x;
-    p2.x += map->shift_x;
-    p1.y += map->shift_y;
-    p2.y += map->shift_y;
+    map->color = (p1.z != 0 || p2.z != 0) ? 0xe80c0c : 0xffffff;
     
-    dx = ft_abs(p2.x - p1.x);
-    dy = ft_abs(p2.y - p1.y);
-    if (dx >= dy)
-        steps = dx;
+    p1_copy = p1;
+    p2_copy = p2;
+    
+    transform(map, &p1_copy, &p2_copy);
+    
+    dx = p2_copy.x - p1_copy.x;
+    dy = p2_copy.y - p1_copy.y;
+    
+    if (fabs(dx) >= fabs(dy))
+        steps = fabs(dx);
     else
-        steps = dy;
+        steps = fabs(dy);
+        
+    if (steps < 1)
+        steps = 1;
+    
     dx /= steps;
     dy /= steps;
-    current_x = p1.x;
-    current_y = p1.y;
-    while (steps >= 0)
+    
+    current_x = p1_copy.x;
+    current_y = p1_copy.y;
+   
+    int i = 0;
+    while (i <= steps)
     {
-        mlx_pixel_put(map->mlx_ptr,map->win_ptr,current_x,current_y,map->color);
+        my_mlx_pixel_put(map, (int)(current_x+0.5), (int)(current_y+0.5), map->color);
         current_x += dx;
         current_y += dy;
-        steps--;
-    }    
+        i++;
+    }
 }
 
 void    draw(t_map *map)

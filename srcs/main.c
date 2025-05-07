@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:25:23 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/04 18:07:29 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:52:25 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,7 @@ int main(int argc, char *argv[])
     
     read_file(argv[1], data); 
 
-    data->mlx_ptr = mlx_init();
-    data->win_ptr = mlx_new_window(data->mlx_ptr, 1000, 1000,"FdF");
-    data->zoom = 100;
-    
-    draw(data);
-    mlx_key_hook(data->win_ptr, deal_key, data);
-    mlx_loop(data->mlx_ptr);
+    fdf(data);
     
     // i = 0;
     // while(i < data->height)

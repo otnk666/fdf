@@ -6,7 +6,7 @@
 #    By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/10 15:02:03 by skomatsu          #+#    #+#              #
-#    Updated: 2025/04/28 18:00:02 by skomatsu         ###   ########.fr        #
+#    Updated: 2025/05/07 18:48:47 by skomatsu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,8 @@ clean:
 		
 fclean: clean
 		$(RM) $(NAME)
-		@cd $(LIB_DIR) && $(MAKE) fclean
-		@cd $(MLX_DIR) && $(MAKE) clean 
+		cd $(LIB_DIR) && $(MAKE) fclean
+		cd $(MLX_DIR) && $(MAKE) clean 
 
 re:		fclean all
 

@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:49:41 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/04 16:15:45 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/07 18:40:52 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 #include "ft_printf.h"
 #include "mlx.h"
 #include "stdlib.h"
+
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 1000
 
 typedef struct s_point
 {
@@ -37,8 +40,15 @@ typedef struct s_map
     int shift_x;
     int shift_y;
     float rotation;
+    
     void    *mlx_ptr;
     void    *win_ptr;
+    void    *img_ptr;
+    char    *addr;
+    int     bpp;
+    int     line_length;
+    int     endian;
+    
     t_point **points;  
 }   t_map;
 
@@ -47,7 +57,8 @@ typedef struct s_map
 void    free_map(t_point **map, int index);
 void    read_file(char *filename, t_map *data);
 void    draw(t_map *map);
-void    zoom(t_map *map, t_point p1, t_point p2);
-
+void    transform(t_map *map, t_point *p1, t_point *p2);
+int     deal_key(int key, t_map *data);
+void    fdf(t_map *data);
 
 #endif
