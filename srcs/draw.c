@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 04:26:49 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/07 18:54:44 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/07 18:59:56 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void    my_mlx_pixel_put(t_map *data, int x, int y, int color)
 {
     char *dst;
-    if(x >= 0 && y >= 0 && x < data->width && y < data->height)
+    if(x >= 0 && y >= 0 && x < WIN_WIDTH && y < WIN_HEIGHT)
     {
-        dst = data->addr + (y+data->line_length + x*(data->bpp / 8));
+        dst = data->addr + (y*data->line_length + x*(data->bpp / 8));
         *(unsigned int *) dst = color;
     }
 }
