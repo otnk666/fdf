@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 04:26:49 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/07 18:59:56 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/07 21:55:37 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,48 +29,49 @@ int    ft_abs(int i)
     return(i);
 }
 
+void    draw_line(t_map *map, t_point p1, t_point p2, float steps)
+{
+    float   dx;
+    float   dy;
+    float   x;
+    float   y;
+    int     i;
+
+    dx = (p2.x - p1.x) / steps;
+    dy = (p2.y - p1.y) / steps;
+    x = p1.x;
+    y = p1.y;
+    i = 0;
+    while (i <= steps)
+    {
+        my_mlx_pixel_put(map, (int)(x+0.5), (int)(y+0.5), map->color);
+        x += dx;
+        y += dy;
+        i++;
+    }
+}
+
 void    drawDDA(t_map *map, t_point p1, t_point p2)
 {
     float   dx;
     float   dy;
     float   steps;
-    float   current_x;
-    float   current_y;
-    t_point p1_copy;
-    t_point p2_copy;
-
+    // t_point p1_copy = p1;
+    // t_point p2_copy = p2;
+    
+    // p1_copy = p1;
+    // p2_copy = p2;
     map->color = (p1.z != 0 || p2.z != 0) ? 0xe80c0c : 0xffffff;
-    
-    p1_copy = p1;
-    p2_copy = p2;
-    
-    transform(map, &p1_copy, &p2_copy);
-    
-    dx = p2_copy.x - p1_copy.x;
-    dy = p2_copy.y - p1_copy.y;
-    
+    transform(map, &p1, &p2);
+    dx = p2.x - p1.x;
+    dy = p2.y - p1.y;
     if (fabs(dx) >= fabs(dy))
         steps = fabs(dx);
     else
         steps = fabs(dy);
-        
     if (steps < 1)
         steps = 1;
-    
-    dx /= steps;
-    dy /= steps;
-    
-    current_x = p1_copy.x;
-    current_y = p1_copy.y;
-   
-    int i = 0;
-    while (i <= steps)
-    {
-        my_mlx_pixel_put(map, (int)(current_x+0.5), (int)(current_y+0.5), map->color);
-        current_x += dx;
-        current_y += dy;
-        i++;
-    }
+    draw_line(map,p1, p2, steps);
 }
 
 void    draw(t_map *map)
