@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 04:26:49 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/07 21:55:37 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/08 21:10:09 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void    draw_line(t_map *map, t_point p1, t_point p2, float steps)
     float   x;
     float   y;
     int     i;
+    int     color;
 
+    
     dx = (p2.x - p1.x) / steps;
     dy = (p2.y - p1.y) / steps;
     x = p1.x;
@@ -44,11 +46,22 @@ void    draw_line(t_map *map, t_point p1, t_point p2, float steps)
     i = 0;
     while (i <= steps)
     {
-        my_mlx_pixel_put(map, (int)(x+0.5), (int)(y+0.5), map->color);
+        my_mlx_pixel_put(map, (int)(x+0.5), (int)(y+0.5), color);
         x += dx;
         y += dy;
         i++;
     }
+}
+
+int     get_color(t_point p1, t_point p2)
+{
+    if (p1.color != -1)
+        return (p1.color);
+    if (p2.color != -1)
+        return (p2.color);
+    if (p1.z != 0 || p2.z !=0)
+        return(0xe80c0c);
+    return(0xffffff);
 }
 
 void    drawDDA(t_map *map, t_point p1, t_point p2)
@@ -56,12 +69,8 @@ void    drawDDA(t_map *map, t_point p1, t_point p2)
     float   dx;
     float   dy;
     float   steps;
-    // t_point p1_copy = p1;
-    // t_point p2_copy = p2;
-    
-    // p1_copy = p1;
-    // p2_copy = p2;
-    map->color = (p1.z != 0 || p2.z != 0) ? 0xe80c0c : 0xffffff;
+
+    map->points->color = get_color(p1, p2);
     transform(map, &p1, &p2);
     dx = p2.x - p1.x;
     dy = p2.y - p1.y;

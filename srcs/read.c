@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:48:08 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/04/28 19:55:37 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/08 17:51:59 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,11 @@ void get_fill(char *file_name, t_map *data)
 {
     char *line;
     char **nums;
-    int i = 0;
+    int i;
     int j;
     int fd;
-
+    
+    i = 0;
     fd = open(file_name, O_RDONLY);
     if(fd < 0)
         return;
@@ -103,20 +104,12 @@ void get_fill(char *file_name, t_map *data)
         nums = ft_split(line, ' ');
         if (!nums)
             return;
-        
         j = 0; 
         while(j < data->width && nums[j]) 
-        {
-            data->points[i][j].z = ft_atoi(nums[j]);
-            j++;
-        }
-        
+            data->points[i][j].z = ft_atoi(nums[j++]);
         j = 0;
         while(nums[j])
-        {
-            free(nums[j]);
-            j++;
-        }
+            free(nums[j++]);
         free(nums);
         free(line);
         i++; 
