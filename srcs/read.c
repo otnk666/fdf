@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:48:08 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/08 17:51:59 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/13 12:02:14 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,44 +77,11 @@ void   map_memory(t_map *data)
             data->points[i][j].x = j;
             data->points[i][j].y = i;
             data->points[i][j].z = 0;
+            data->points[i][j].color = 0;
             j ++;
         }
         i++;
     }
-}
-
-
-void get_fill(char *file_name, t_map *data)
-{
-    char *line;
-    char **nums;
-    int i;
-    int j;
-    int fd;
-    
-    i = 0;
-    fd = open(file_name, O_RDONLY);
-    if(fd < 0)
-        return;
-    while(i < data->height)
-    {
-        line = get_next_line(fd);
-        if(!line)
-            break;
-        nums = ft_split(line, ' ');
-        if (!nums)
-            return;
-        j = 0; 
-        while(j < data->width && nums[j]) 
-            data->points[i][j].z = ft_atoi(nums[j++]);
-        j = 0;
-        while(nums[j])
-            free(nums[j++]);
-        free(nums);
-        free(line);
-        i++; 
-    }
-    close(fd);    
 }
 
 void    read_file(char *filename, t_map *data)

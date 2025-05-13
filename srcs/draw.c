@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 04:26:49 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/08 21:10:09 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:49:51 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void    draw_line(t_map *map, t_point p1, t_point p2, float steps)
     float   x;
     float   y;
     int     i;
-    int     color;
 
     
     dx = (p2.x - p1.x) / steps;
@@ -46,7 +45,7 @@ void    draw_line(t_map *map, t_point p1, t_point p2, float steps)
     i = 0;
     while (i <= steps)
     {
-        my_mlx_pixel_put(map, (int)(x+0.5), (int)(y+0.5), color);
+        my_mlx_pixel_put(map, (int)(x+0.5), (int)(y+0.5), map->color);
         x += dx;
         y += dy;
         i++;
@@ -70,7 +69,7 @@ void    drawDDA(t_map *map, t_point p1, t_point p2)
     float   dy;
     float   steps;
 
-    map->points->color = get_color(p1, p2);
+    map->color = get_color(p1, p2);
     transform(map, &p1, &p2);
     dx = p2.x - p1.x;
     dy = p2.y - p1.y;

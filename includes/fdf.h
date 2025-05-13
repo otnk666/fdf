@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:49:41 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/08 20:51:39 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:47:14 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_map
     int shift_x;
     int shift_y;
     float rotation;
-    
+    int color;
     void    *mlx_ptr;
     void    *win_ptr;
     void    *img_ptr;
