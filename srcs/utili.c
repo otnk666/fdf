@@ -5,9 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 17:37:47 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/08 17:37:55 by skomatsu         ###   ########.fr       */
+/*   Created: 2025/05/15 13:43:19 by skomatsu          #+#    #+#             */
+/*   Updated: 2025/05/15 13:44:31 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int	ft_abs(int i)
+{
+	if (i < 0)
+		return (-i);
+	return (i);
+}

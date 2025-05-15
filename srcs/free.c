@@ -6,21 +6,21 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:50:17 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/04/28 19:53:25 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/13 13:03:10 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void    free_map(t_point **map, int index)
+void	free_map(t_point **map, int index)
 {
-    int     i;
+	int	i;
 
-    i = 0;
-    while (i < index)
-    {
-        free(map[i]);
-        i++;
-    }
-    free(map);
+	i = 0;
+	while (i < index)
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }
