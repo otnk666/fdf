@@ -6,7 +6,7 @@
 #    By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/10 15:02:03 by skomatsu          #+#    #+#              #
-#    Updated: 2025/05/07 18:48:47 by skomatsu         ###   ########.fr        #
+#    Updated: 2025/05/15 14:07:18 by skomatsu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,17 @@ INC_DIR = ./includes
 LIB_DIR = ./libft
 MLX_DIR = ./minilibx-linux
 
-SRCS = $(wildcard $(SRCS_DIR)/*.c)
+SRCS = $(addprefix $(SRCS_DIR)/, \
+	draw.c	\
+	fdf.c	\
+	free.c	\
+	get_fill.c	\
+	main.c	\
+	read.c	\
+	transform.c	\
+	utili.c	\
+	) \
+
 OBJS = $(SRCS:.c=.o )
 
 INCLUDES = -I $(INC_DIR) -I $(LIB_DIR)/includes -I $(MLX_DIR)
@@ -47,8 +57,8 @@ clean:
 		
 fclean: clean
 		$(RM) $(NAME)
-		cd $(LIB_DIR) && $(MAKE) fclean
-		cd $(MLX_DIR) && $(MAKE) clean 
+		$(MAKE) -C $(MLX_DIR) clean
+		$(MAKE) -C $(LIB_DIR) fclean
 
 re:		fclean all
 
