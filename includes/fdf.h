@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:49:41 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/13 11:47:14 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:59:55 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_map
 	int		bpp;
 	int		line_length;
 	int		endian;
-
 	t_point	**points;
 }			t_map;
 
@@ -61,4 +60,5 @@ void		transform(t_map *map, t_point *p1, t_point *p2);
 int			deal_key(int key, t_map *data);
 void		fdf(t_map *data);
 int			close_window(t_map *map);
+void		perror_and_exit(char *msg);
 #endif

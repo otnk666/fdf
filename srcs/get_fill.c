@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:57:17 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/13 12:59:17 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:48:33 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,12 @@ void	parse_point(char *str, t_point *point)
 		if (!split)
 			return ;
 		point->z = ft_atoi(split[0]);
-		if (split[1] && ft_strncmp(split[1], "0x", 2) == 0)
+		if (split[1])
 		{
-			point->color = ft_atoi_base(split[1] + 2, 16);
+			if (ft_strncmp(split[1], "0x", 2) == 0)
+				point->color = ft_atoi_base(split[1] + 2, 16);
+			else
+				point->color = ft_atoi_base(split[1], 16);
 		}
 		else
 			point->color = -1;

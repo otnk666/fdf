@@ -6,7 +6,7 @@
 #    By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/10 15:02:03 by skomatsu          #+#    #+#              #
-#    Updated: 2025/05/15 14:07:18 by skomatsu         ###   ########.fr        #
+#    Updated: 2025/05/21 13:53:06 by skomatsu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ MLX_DIR = ./minilibx-linux
 
 SRCS = $(addprefix $(SRCS_DIR)/, \
 	draw.c	\
+	error.c	\
 	fdf.c	\
 	free.c	\
 	get_fill.c	\

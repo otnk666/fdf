@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:25:23 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/15 13:32:43 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:01:59 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int	deal_key(int key, t_map *data)
 		data->zoom -= 1;
 	if (key == XK_x && data->zoom < 100)
 		data->zoom += 1;
+	if (key == XK_j)
+		data->rotation -= 0.1;
+	if (key == XK_k)
+		data->rotation += 0.1;	
 	if (key == XK_Escape)
 		close_window(data);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
@@ -41,13 +45,11 @@ int	main(int argc, char *argv[])
 	t_map	*data;
 
 	if (argc != 2)
-	{
-		printf("Error: usage: ./fdf filename\n");
-		return (1);
-	}
+		perror_and_exit("Error: usage: ./fdf filename\n");
+
 	data = (t_map *)malloc(sizeof(t_map));
 	if (!data)
-		return (1);
+		exit (1);
 	data->width = 0;
 	data->height = 0;
 	data->points = NULL;

@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 04:26:49 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/15 13:44:11 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:51:19 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,13 @@ int	get_color(t_point p1, t_point p2)
 		return (p1.color);
 	if (p2.color != -1)
 		return (p2.color);
-	if (p1.z != 0 || p2.z != 0)
+	if (p1.z > 0 || p2.z > 0)
 		return (0xe80c0c);
-	return (0xffffff);
+	else if(p1.z < 0 || p2.z < 0)
+		return (0xffff00);
+	else 
+		return (0xffffff);
+		
 }
 
 void	draw_dda(t_map *map, t_point p1, t_point p2)

@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:48:08 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/14 15:35:58 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:04:10 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	get_dimension(char *file_name, t_map *data)
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		return ;
+		perror_and_exit("Error") ;
 	data->height = 0;
 	data->width = 0;
 	while (1)
