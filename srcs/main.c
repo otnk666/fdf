@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:25:23 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/21 16:01:59 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/24 17:34:26 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	deal_key(int key, t_map *data)
 	if (key == XK_j)
 		data->rotation -= 0.1;
 	if (key == XK_k)
-		data->rotation += 0.1;	
+		data->rotation += 0.1;
 	if (key == XK_Escape)
 		close_window(data);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
@@ -46,7 +46,6 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 		perror_and_exit("Error: usage: ./fdf filename\n");
-
 	data = (t_map *)malloc(sizeof(t_map));
 	if (!data)
 		exit (1);

@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:48:08 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/21 16:04:10 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:50:10 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	get_dimension(char *file_name, t_map *data)
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		perror_and_exit("Error") ;
+		perror_and_exit("Error:Failed to open file");
 	data->height = 0;
 	data->width = 0;
 	while (1)
@@ -52,6 +52,8 @@ void	get_dimension(char *file_name, t_map *data)
 		free(line);
 	}
 	close(fd);
+	if (data->height == 0 || data->width == 0)
+		perror_and_exit("Error:Invalid or empty map");
 }
 
 void	map_memory(t_map *data)

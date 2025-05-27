@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:37:09 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/17 17:52:36 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/24 17:35:30 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	transform(t_map *map, t_point *p1, t_point *p2)
 	p2->y *= map->zoom;
 	p1->z *= map->zoom / 10;
 	p2->z *= map->zoom / 10;
-	isometric(p1,map);
-	isometric(p2,map);
+	isometric(p1, map);
+	isometric(p2, map);
 	p1->x += map->shift_x;
 	p2->x += map->shift_x;
 	p1->y += map->shift_y;
