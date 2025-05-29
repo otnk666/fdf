@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:25:23 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/24 17:34:26 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:08:45 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,26 @@ int	deal_key(int key, t_map *data)
 	return (0);
 }
 
+int	check_fdffile(char *filename)
+{
+	char	*extension;
+
+	if (!filename)
+		return (0);
+	extension = ft_strrchr(filename, '.');
+	if (!extension)
+		return (0);
+	return (ft_strncmp(extension, ".fdf", 4) == 0);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_map	*data;
 
 	if (argc != 2)
-		perror_and_exit("Error: usage: ./fdf filename\n");
+		perror_and_exit("Error: usage: ./fdf filename\n", NULL);
+	if (!check_fdffile(argv[1]))
+		perror_and_exit("Error: File must have .fdf", NULL);
 	data = (t_map *)malloc(sizeof(t_map));
 	if (!data)
 		exit (1);

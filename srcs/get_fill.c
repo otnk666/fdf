@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:57:17 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/24 17:36:25 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:16:35 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	get_fill(char *file_name, t_map *data)
 	i = 0;
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		perror_and_exit("Error: Failed to open file for reading map data");
+		perror_and_exit("Error: Failed to open file", data);
 	while (i < data->height)
 	{
 		line = get_next_line(fd);
@@ -116,7 +116,7 @@ void	get_fill(char *file_name, t_map *data)
 		if (!nums)
 		{
 			free(line);
-			perror_and_exit("Error: Memory allocation failed");
+			perror_and_exit("Error: Memory allocation failed", data);
 		}
 		process_line(nums, data, i);
 		free_resources(nums, line);

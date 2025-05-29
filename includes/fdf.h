@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:49:41 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/21 15:59:55 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/05/27 18:28:08 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void		transform(t_map *map, t_point *p1, t_point *p2);
 int			deal_key(int key, t_map *data);
 void		fdf(t_map *data);
 int			close_window(t_map *map);
-void		perror_and_exit(char *msg);
+void		perror_and_exit(char *msg, t_map *data);
+void		free_all_resources(t_map *map);
 #endif
