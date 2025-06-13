@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 16:10:47 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/17 17:55:56 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:22:05 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,13 @@ void	fdf(t_map *data)
 
 int	close_window(t_map *map)
 {
+	if(map->points)
+		free_map(map->points, map->height);
 	mlx_destroy_image(map->mlx_ptr, map->img_ptr);
 	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
 	mlx_destroy_display(map->mlx_ptr);
 	free(map->mlx_ptr);
+	free(map);
 	exit(0);
 	return (0);
 }

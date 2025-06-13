@@ -6,7 +6,7 @@
 /*   By: skomatsu <skomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:25:23 by skomatsu          #+#    #+#             */
-/*   Updated: 2025/05/29 16:08:45 by skomatsu         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:19:39 by skomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,6 @@ int	main(int argc, char *argv[])
 	data->points = NULL;
 	read_file(argv[1], data);
 	fdf(data);
+	free_all_resources(data);
+	return (0);
 }
